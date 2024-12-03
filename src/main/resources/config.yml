@@ -1,0 +1,63 @@
+# General settings
+spawn:
+  interval_ticks: 72000        # How often the chest should be spawned (in ticks). 72000 ticks = 1 hour.
+
+# Spawn location settings
+location:
+  world: "world"               # Name of the world where the chest will spawn.
+  minx: -50                    # Center X coordinate of the spawn area.
+  miny: 64                     # Center Y coordinate of the spawn area.
+  minz: -50                    # Center Z coordinate of the spawn area.
+  maxx: 50                     # X radius for random spawn location within the area.
+  maxy: 80                     # Y range for random spawn location within the area.
+  maxz: 50                     # Z radius for random spawn location within the area.
+
+variables:
+  rand:                        # Variable name
+    random_number: [1, 20]     # Define a random range for commands or other logic.
+  prize:                       # Variable name
+    random_item:               # Define a random item from list for commands or other logic.
+      - "diamond"
+      - "emerald"
+      - "gold_ingot"
+  hex:
+    expression: "Integer:toHexString(Random:nextInt())"  # Expression in Java. There are 4 registered classes: Integer, String, Random and Math (don't provide namespace for Math methods)
+
+# Chest configuration
+chest:
+  commands:                    # Commands to execute when the chest is opened.
+    - "give {player} {prize} {rand}"  # Give a random number of random item to the player.
+    - "title {player} title {\"text\":\"Treasure Found!\",\"color\":\"gold\"}"
+
+# Block restrictions
+blocked-blocks:
+  - "WATER"                   # Chest cannot spawn on water.
+  - "LAVA"                    # Chest cannot spawn on lava.
+  - "AIR"                     # Optional: Prevent spawning in midair.
+  - "SHORT_GRASS"             # Optional: Prevent spawning on short grass.
+  - "TALL_GRASS"              # Optional: Prevent spawning on tall grass.
+
+# Firework settings
+fireworks:
+  enabled: true                # Enable or disable fireworks when the treasure is found.
+  type: "BURST"                # Firework effect type (e.g., BURST, STAR, BALL, CREEPER).
+  colors:                      # List of colors for the fireworks.
+    - "ORANGE"
+    - "WHITE"
+    - "SILVER"
+  power: 1                     # Power level of the fireworks (1-3).
+
+# Messages and broadcasts
+messages:
+  found_message: "Congratulations {player}, you found the treasure!"  # Message when the chest is found.
+  broadcast_message: true      # Whether to broadcast the found message to the entire server.
+
+  clues:
+    near_water:
+      - "The treasure is near the water."
+    near_lava:
+      - "Look for lava around."
+    near_tall_grass:
+      - "It’s not far from a tall grass."
+
+clue_search_radius: 5

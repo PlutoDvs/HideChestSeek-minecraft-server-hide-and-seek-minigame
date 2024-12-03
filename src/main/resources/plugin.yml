@@ -1,0 +1,6 @@
+name: HideChestSeek
+version: '1.0.0'
+main: me.pluto.hideChestSeek.HideChestSeek
+api-version: '1.20'
+prefix: HideChestSeek
+authors: [ Naimad (discord: 4g0) ]
